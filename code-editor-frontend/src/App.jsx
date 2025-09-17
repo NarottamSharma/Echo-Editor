@@ -1,11 +1,16 @@
 import React from 'react'
-import EditorCompnent from './components/EditorCompnent'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import HomePage from './components/HomePage'
+import RoomPage from './components/RoomPage'
 
 const App = () => {
   return (
-    <div>
-      <EditorCompnent/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/room/:roomId" element={<RoomPage />} />
+      </Routes>
+    </Router>
   )
 }
 
