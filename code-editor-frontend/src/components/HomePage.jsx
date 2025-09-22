@@ -32,7 +32,8 @@ const HomePage = () => {
     setIsCreating(true)
     try {
       console.log('📡 Sending request to create session...')
-      const response = await fetch('http://localhost:3001/api/sessions', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+      const response = await fetch(`${apiUrl}/api/sessions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

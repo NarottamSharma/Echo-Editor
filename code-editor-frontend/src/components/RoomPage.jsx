@@ -52,7 +52,8 @@ const RoomPage = () => {
     localStorage.setItem('username', storedUsername)
 
     // Initialize socket connection
-    socketRef.current = io.connect("http://localhost:3001")
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || "http://localhost:3001"
+    socketRef.current = io.connect(socketUrl)
     
     socketRef.current.on('connect', () => {
       console.log('Connected to server')
