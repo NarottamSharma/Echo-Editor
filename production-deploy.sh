@@ -1,15 +1,11 @@
 #!/bin/bash
 
 # Complete deployment script for Echo Editor on DigitalOcean
-# Usage: ./production-deploy.sh YOUR_DOMAIN.com
+# Usage: ./production-deploy.sh codebynarottam.tech
 
-DOMAIN=$1
+DOMAIN=${1:-"codebynarottam.tech"}
 
-if [ -z "$DOMAIN" ]; then
-    echo "❌ Please provide your domain name"
-    echo "Usage: ./production-deploy.sh yourdomain.com"
-    exit 1
-fi
+echo "🌐 Using domain: $DOMAIN"
 
 echo "🚀 Deploying Echo Editor to $DOMAIN"
 
@@ -57,8 +53,13 @@ fi
 echo "🔒 Setting up SSL certificate..."
 sudo apt install certbot python3-certbot-nginx -y
 
-# Get SSL certificate
-sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN
+# Get SSL certificate for main domain and subdomains
+sudo certbot --nginx \
+  -d $DOMAIN \
+  -d www.$DOMAIN \
+  -d echo.$DOMAIN \
+  -d editor.$DOMAIN \
+  --non-interactive --agree-tos --email admin@$DOMAIN
 
 # Start backend with PM2
 echo "🚀 Starting backend service..."
