@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.json())
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/echo-editor')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('📁 Connected to MongoDB Atlas'))
   .catch(err => {
     console.warn('⚠️  MongoDB not available, running in memory-only mode')
